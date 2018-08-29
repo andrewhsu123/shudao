@@ -11,15 +11,7 @@ class Gogo extends Controller {
         $datas      = array();
         $where      = array('is_push'=>0);
         $data       = db('Notice')->field("id,title,content,is_cn")->where($where)->select();
-
-        // foreach ($data as $k => $v) {
-        //     if($v['title']){
-        //         $datas[] = $v['title'].':'.$v['content'];
-        //     }else{
-        //         $datas[] = $v['content'];
-        //     }
-        // }
-
+        
         $pushData = array('status'=>'4808','msg'=>'Advert','data'=>$data);
         if(!empty($data)){
             self::pushData ($pushData);

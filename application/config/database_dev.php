@@ -1,15 +1,11 @@
 <?php
-/**
- * 开发环境
- */
-
 return [
     // 服务器地址
-    'hostname' => '192.168.0.129',
+    'hostname' => '127.0.0.1',
     // 数据库名
-    'database' => 'myfish',
+    'database' => 'shudao',
     // 用户名
-    'username' => 'myfish',
+    'username' => 'root',
     // 密码
-    'password' => 'qwerty123',
+    'password' => 'root',
 ];

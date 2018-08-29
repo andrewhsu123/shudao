@@ -10,6 +10,7 @@ class BaseController {
 
     //不需要TOKEN校验地址
     private static $allowUrl = [
+        '',
         'v1/account/login',
         'v1/account/changePwd',
         'v1/account/reg',
@@ -24,17 +25,24 @@ class BaseController {
     ];
 
     public function __construct(Request $request) {
+        // 
         $this->detectLang();
+        // 获取当前访问的路径   ltrim => 移除左侧空白
         $baseUrl = ltrim($request->baseUrl(), '/');
+        // 如果访问路径不在数组里则验证 token
         if(!in_array($baseUrl, self::$allowUrl)) {
+            // 获取登录 token
             $token = input('token');
+            // 没有提交token
             if(empty($token)) {
-                exit($this->error(lang('invalid_token'), 20000)->send());
+                exit($this->error(lang('invalid_token'), 401)->send());
             }
-            $userToken = Db::table('user_token')->field('user_id')->where('token', $token)->find();
-            if(empty($userToken)) {
-                exit($this->error(lang('invalid_token'), 20000)->send());
+            // 没有找到用户
+            $user_id = db('UserToken')->where('token', $token)->value('user_id');
+            if(empty($user_id)) {
+                exit($this->error(lang('invalid_token'), 402)->send());
             }
+
             $user = Db::table('user')->field('status,rolename')->where('id', $userToken['user_id'])->find();
             if(empty($user)) {
                 exit($this->error(lang('invalid_token'), 20000)->send());
@@ -56,6 +64,7 @@ class BaseController {
         //语言切换
         $lang = input('lang') ?: 'zh';
         $langArr = config('config.lang');
+        // 检查键名是否存在
         if($lang && array_key_exists($lang, $langArr)) {
             Lang::range($langArr[$lang]);
             Lang::load(APP_PATH . 'lang/' . $langArr[$lang] . '.php');

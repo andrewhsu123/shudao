@@ -2,13 +2,6 @@
 use think\Lang;
 
 Lang::load(APP_PATH . 'lang/en-us/user.php');
-Lang::load(APP_PATH . 'lang/en-us/fish.php');
-Lang::load(APP_PATH . 'lang/en-us/adventure.php');
-Lang::load(APP_PATH . 'lang/en-us/postal.php');
-Lang::load(APP_PATH . 'lang/en-us/fishery.php');
-Lang::load(APP_PATH . 'lang/en-us/charge.php');
-Lang::load(APP_PATH . 'lang/en-us/tables.php');
-Lang::load(APP_PATH . 'lang/en-us/myfish.php');
 
 return [
 	'mobile_format_wrong' => 'Mobile format is wrong',

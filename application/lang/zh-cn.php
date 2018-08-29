@@ -1,24 +1,17 @@
 <?php
 use think\Lang;
 
-Lang::load(APP_PATH . 'lang/zh-cn/user.php');
-Lang::load(APP_PATH . 'lang/zh-cn/fish.php');
-Lang::load(APP_PATH . 'lang/zh-cn/adventure.php');
-Lang::load(APP_PATH . 'lang/zh-cn/postal.php');
-Lang::load(APP_PATH . 'lang/zh-cn/fishery.php');
-Lang::load(APP_PATH . 'lang/zh-cn/charge.php');
-Lang::load(APP_PATH . 'lang/zh-cn/tables.php');
-Lang::load(APP_PATH . 'lang/zh-cn/myfish.php');
+// Lang::load(APP_PATH . 'lang/zh-cn/user.php');
 
 return [
-	'mobile_format_wrong' => '手机号码格式不正确',
-	'mobile_exist' => '手机号码已注册',
-	'password_format_wrong' => '密码长度为6-16位',
-	'mobile_area_wrong' => '请选择手机区号',
-	'mobile_check_code_wrong' => '验证码错误',
-	'success' => '成功',
-	'fail' => '失败',
-    'invalid_token' => '请登入',
+    'invalid_token'             => '用户未登录',
+    'mobile_format_wrong'       => '手机号码格式不正确',
+    'mobile_exist'              => '手机号码已注册',
+    'password_format_wrong'     => '密码长度为6-16位',
+    'mobile_area_wrong'         => '请选择手机区号',
+    'mobile_check_code_wrong'   => '验证码错误',
+    'success'                   => '成功',
+    'fail'                      => '失败',
     'data_exception' => '数据异常',
     'data_not_exist' => '数据不存在',
     'balance_not_enough' => '余额不足',
