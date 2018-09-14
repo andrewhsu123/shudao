@@ -90,22 +90,6 @@ function isExistSensitiveWord($word) {
 	return false;
 }
 
-function mul($int_num, $int_num2, $pad = 8) {
-	return bcmul(number_format($int_num, 16, '.', ''), number_format($int_num2, 16, '.', ''), $pad);
-}
-
-function div($int_num, $int_num2, $pad = 8) {
-	return bcdiv(number_format($int_num, 16, '.', ''), number_format($int_num2, 16, '.', ''), $pad);
-}
-
-function add($int_num, $int_num2, $pad = 8) {
-	return bcadd(number_format($int_num, 16, '.', ''), number_format($int_num2, 16, '.', ''), $pad);
-}
-
-function sub($int_num, $int_num2, $pad = 8) {
-	return bcsub(number_format($int_num, 16, '.', ''), number_format($int_num2, 16, '.', ''), $pad);
-}
-
 /**
  * 比较两个高精度数
  * @param $num1

@@ -11,17 +11,17 @@ class BaseController {
     //不需要TOKEN校验地址
     private static $allowUrl = [
         '',
-        'v1/account/login',
-        'v1/account/changePwd',
-        'v1/account/reg',
-        'v1/sms/send',
-        'v1/charge/addressImg',
-        'v1/charge/notify',
-        'v1/charge/takeMsgNofify',
-        'v1/charge/balanceChange',
-        'v1/hatch/distribution',
-        'v1/config',
-        'v1/transfer/notify',
+        // 'v1/index/indexf',
+        // 'v1/account/changePwd',
+        // 'v1/account/reg',
+        // 'v1/sms/send',
+        // 'v1/charge/addressImg',
+        // 'v1/charge/notify',
+        // 'v1/charge/takeMsgNofify',
+        // 'v1/charge/balanceChange',
+        // 'v1/hatch/distribution',
+        // 'v1/config',
+        // 'v1/transfer/notify',
     ];
 
     public function __construct(Request $request) {
@@ -30,7 +30,8 @@ class BaseController {
         // 获取当前访问的路径   ltrim => 移除左侧空白
         $baseUrl = ltrim($request->baseUrl(), '/');
         // 如果访问路径不在数组里则验证 token
-        if(!in_array($baseUrl, self::$allowUrl)) {
+        // if(!in_array($baseUrl, self::$allowUrl)) {
+        if(0) {
             // 获取登录 token
             $token = input('token');
             // 没有提交token
