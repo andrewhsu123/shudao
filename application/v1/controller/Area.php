@@ -1,13 +1,14 @@
 <?php
 namespace app\v1\controller;
 use app\common\controller\BaseController;
+use app\area\model\AreaModel;
 
-class City extends BaseController {
+class Area extends BaseController {
 
 	/**
-	 * @api {get} http://shudaoo.com/v1/city/index
+	 * @api {get} http://shudaoo.com/v1/area/index
 	 * @apiName  index
-	 * @apiGroup 首页接口
+	 * @apiGroup 地区列表
 	 * @apiParam (params) {sting} token 用户唯一标识符
 	 * @apiSuccess {int} code 200
 	 * @apiSuccess {String} msg  接口访问成功
@@ -29,15 +30,17 @@ class City extends BaseController {
 	 *     }
 	 */
 	public function index(){
-		$field = "id,name";
-		$cityInfo = db('TabCity')->field($field)->where('pid',0)->order('n asc')->select();
-		foreach ($cityInfo as $k => $v) {
-			$cityInfo[$k]['pcity'] = db('TabCity')->field($field)->where('pid',$v['id'])->order('n asc')->select();
-		}
-		$msg = "地区列表";
-        $return 	= array('code'=>'200', 'msg'=>$msg, 'data'=>$cityInfo);
+		$areaInfo 	= AreaModel::getArea();
+		$msg 		= "地区列表";
+        $return 	= array('code'=>'200', 'msg'=>$msg, 'data'=>$areaInfo);
         $this->ajaxReturn($return);
 	}
 
+	public function setArea(){
+		$user_id = UID;
+		$city_id = I('area_id');
+		$data    = array(); 
+		db('User')->where('id',$user_id)->data($data)->save();
+	}
 	
 }

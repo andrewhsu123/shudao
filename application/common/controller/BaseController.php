@@ -31,9 +31,9 @@ class BaseController {
         $baseUrl = ltrim($request->baseUrl(), '/');
         // 如果访问路径不在数组里则验证 token
         // if(!in_array($baseUrl, self::$allowUrl)) {
-        if(0) {
+        if(1) {
             // 获取登录 token
-            $token = input('token');
+            $token = input('token',123456);
             // 没有提交token
             if(empty($token)) {
                 exit($this->error(lang('invalid_token'), 401)->send());
@@ -44,16 +44,15 @@ class BaseController {
                 exit($this->error(lang('invalid_token'), 402)->send());
             }
 
-            $user = Db::table('user')->field('status,rolename')->where('id', $userToken['user_id'])->find();
+            $user = db('user')->field('status,nickname')->where('id', $user_id)->find();
             if(empty($user)) {
-                exit($this->error(lang('invalid_token'), 20000)->send());
+                exit($this->error(lang('invalid_token'), 403)->send());
             }
             //判断封号
-            if($user['status'] == 1) {
-                exit($this->error(lang('account_disabled'), 20100)->send());
+            if($user['status'] == 0) {
+                exit($this->error(lang('account_disabled'), 404)->send());
             }
-
-            define('UID', $userToken['user_id']);
+            define('UID', $user_id);
         }
 
     }
@@ -99,7 +98,7 @@ class BaseController {
      */
     protected function success($msg = '', $data = []) {
         $result = [
-            'code' => 0,
+            'code' => 200,
             'msg' => $msg,
             'data' => $data
         ];
