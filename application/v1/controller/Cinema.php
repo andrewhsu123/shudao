@@ -43,7 +43,6 @@ class Cinema extends BaseController {
         $this->ajaxReturn($return);
 	}
 
-
 	/**
 	 * @api {get} http://shudaoo.com/v1/cinema/setCinema
 	 * @apiName  setCinema
