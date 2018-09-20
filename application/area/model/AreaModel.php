@@ -24,17 +24,61 @@ class AreaModel extends Model {
                 Db::rollback();
                 $result = array('code'=>"0001", 'msg'=>"地区不为空");
             }
-            $data   = array('area_id'=>$area_id); 
-            $flag   = db('User')->where('id',$user_id)->data($data)->save();
+            $address = self::getAddress($area_id);
+            $data    = array('area_id'=>$area_id,'address'=>$address);
+            $flag    = db('User')->where('id',$user_id)->data($data)->update();
             Db::commit();
-            $result = array('code'=>"200", 'msg'=>"设置地区成功");
+            $result  = array('code'=>"200", 'msg'=>"设置地区成功");
             return $result;
         } catch (\Exception $e) {
-            // 回滚事务
             Db::rollback();
             $result = array('code'=>"0002", 'msg'=>"设置地区失败");
             return $result;
         }
     }
-    
+
+    // 获取地址
+    public static function getAddress($id){
+        $areaInfo = db('Area')->field('id,pid,name,level')->select();
+        $areaInfo = self::getTreeDesc($areaInfo,$id);
+
+        switch ($areaInfo['level']) {
+            case '4':
+                $address = $areaInfo['pcity']['pcity']['name'].$areaInfo['pcity']['name'].$areaInfo['name'];
+                break;
+            case '3':
+                $address = $areaInfo['pcity']['name'].$areaInfo['name'];
+                break;
+            default:
+                $address = $areaInfo['name'];
+                break;
+        }
+        return (string) $address;
+    }
+
+    // 儿子找爸爸
+    public static function getTreeDesc($data, $id){
+        foreach($data as $k => $v){
+           if($v['id'] == $id){
+                if($v['pid']!=0){
+                    $pcity = self::getTreeDesc($data, $v['pid']);
+                    $v['pcity'] = $pcity;
+                }
+                $tree = $v;
+           }
+        }
+        return $tree;
+    }
+
+    // 爸爸找儿子
+    public static function getTreeAsc($data, $pid){
+        foreach($data as $k => $v){
+           if($v['pid'] == $pid){
+                $v['pid'] = self::getTreeAsc($data, $v['id']);
+                $tree[] = $v;
+           }
+        }
+        return $tree;
+    }
+
 }

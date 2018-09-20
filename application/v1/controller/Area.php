@@ -13,6 +13,8 @@ class Area extends BaseController {
 	 * @apiSuccess {int} code 200
 	 * @apiSuccess {String} msg  接口访问成功
 	 * @apiSuccess {Array} data []
+	 * 
+	 * 
 	 *
 	 * @apiSuccessExample Success-Response:
 	 *    HTTP/1.1 200 OK
@@ -41,8 +43,8 @@ class Area extends BaseController {
 	 * @api {get} http://shudaoo.com/v1/area/setArea
 	 * @apiName  setArea
 	 * @apiGroup 设置地区
-	 * @apiParam (params) {sting} token 用户唯一标识符
-	 * @apiParam (params) {int} area_id 地区编号
+	 * @apiParam (params) {sting} token 用户唯一标识符 
+	 * 
 	 * @apiSuccess {int} code 200
 	 * @apiSuccess {String} msg  接口访问成功
 	 * @apiSuccess {Array} data []
@@ -63,8 +65,8 @@ class Area extends BaseController {
 	 */
 	public function setArea(){
 		$user_id = UID;
-		$area_id = I('area_id');
-		$return  = AreaModel::getArea($user_id,$area_id);
+		$area_id = input('area_id');
+		$return  = AreaModel::setArea($user_id,$area_id);
         $this->ajaxReturn($return);
 	}
 }
