@@ -15,6 +15,8 @@ class CinemaModel extends Model {
         	$address = AreaModel::getAddress($area_id);
         	$info[$k]['address'] = $address.$v['address'];
         }
+        $area_name = db('Area')->where('id',$area_id)->value('name');
+        $return = array('lists'=>$info,'area_name'=>$area_name);
         return $info;
     }
 

@@ -6,11 +6,7 @@ class Index extends BaseController {
 
     public function index()
     {	
-		header("location:http://shudaoo.com/doc/index.html");
-    }
-
-    public function shudao()
-    {	
-		header("location:http://shudaoo.com/doc_api/index.html");
+    	$url = 'http://' . $_SERVER['HTTP_HOST'] ;
+		header("location:".$url."/doc/index.html");
     }
 }

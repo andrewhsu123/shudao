@@ -7,7 +7,8 @@ use app\common;
 class FilmModel extends Model {
     
     // 获取地区影院列表
-    public static function getFilmList($area_id){
+    public static function getFilmList($cinema_id,$type){
+    	
         $field = "id,name";
         $cityInfo = db('film')->field($field)->where('pid',0)->order('n asc')->select();
         foreach ($cityInfo as $k => $v) {
