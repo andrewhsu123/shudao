@@ -339,6 +339,20 @@ define({ "api": [
             "optional": false,
             "field": "cinema_id",
             "description": "<p>影院编号</p>"
+          },
+          {
+            "group": "params",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "params",
+            "type": "int",
+            "optional": false,
+            "field": "pagesize",
+            "description": "<p>每页记录数</p>"
           }
         ]
       }
@@ -372,7 +386,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n  {\n    \"banner\": \"---轮播图---\",\n    \"name\": \"图片名称\",\n    \"url\": \"跳转链接\",\n    \"name\": \"图片地址\",\n   }",
+          "content": "HTTP/1.1 200 OK\n  {\n    \"banner\": \"---轮播图---\",\n    \"name\": \"图片名称\",\n    \"url\": \"跳转链接\",\n    \"name\": \"图片地址\",\n    \"hotFilm\": \"---正在热播---\",\n    \"id\": \"影片编号\",\n    \"name\": \"影片名称\",\n    \"introduction\": \"影片一句话简介\",\n    \"img\": \"影片图片\",\n    \"score\": \"影片评分\",\n    \"showFilm\": \"---即将上映---\",\n    \"id\": \"影片编号\",\n    \"name\": \"影片名称\",\n    \"see_num\": \"想看人数\",\n    \"filmList\": \"---全部影片---\",\n    \"movie_type\": \"120分钟  犯罪、剧情、冒险\",\n    \"actor\": \"主演\",\n    \"video_type\": \"2D,3D,IMAX,MX4D,中国巨幕\",\n   }",
           "type": "json"
         }
       ]
