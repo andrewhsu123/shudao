@@ -23,6 +23,8 @@ class Film extends BaseController {
 			    "name": "影片名称",
 			    "img":  "影片图片",
 			    "score":  "评分",
+			    "is_see":  "1:看过",
+			    "is_like":  "1:想看", 
 			    "release_time": "上映时间",
 			    "video_type": "2D,3D,IMAX,MX4D,中国巨幕",
 			    "movie_type": "120分钟  犯罪、剧情、冒险",

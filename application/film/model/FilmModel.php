@@ -43,6 +43,8 @@ class FilmModel extends Model {
         $info['release_time'] = date('Y年m月d日',$info['release_time'])."上映";
         $info['actor']    = ActorModel::getActorList($info['actor_ids']);
         $info['still']    = db('Still')->field('img')->where('group',$info['still_group'])->select();
+        $info['is_see']   = 1;
+        $info['is_like']  = 1;
         unset($info['actor_ids'],$info['still_group']);
         return $info;
     }
