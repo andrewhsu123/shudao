@@ -72,7 +72,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./v1/controller/Area.php",
+    "filename": "./Area.php",
     "groupTitle": "地区列表"
   },
   {
@@ -155,7 +155,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./v1/controller/Film.php",
+    "filename": "./Film.php",
     "groupTitle": "影片详情"
   },
   {
@@ -238,8 +238,98 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./v1/controller/Cinema.php",
+    "filename": "./Cinema.php",
     "groupTitle": "影院列表"
+  },
+  {
+    "type": "get",
+    "url": "http://shudaoo.com/v1/film/like",
+    "title": "",
+    "name": "like",
+    "group": "想看/喜欢_操作",
+    "parameter": {
+      "fields": {
+        "params": [
+          {
+            "group": "params",
+            "type": "sting",
+            "optional": false,
+            "field": "token",
+            "description": "<p>用户唯一标识符[目前默认123456]</p>"
+          },
+          {
+            "group": "params",
+            "type": "int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>影片编号</p>"
+          },
+          {
+            "group": "params",
+            "type": "int",
+            "optional": false,
+            "field": "type",
+            "description": "<p>1:是否想看  2:是否看过</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "code",
+            "description": "<p>200</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>接口访问成功</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data",
+            "description": "<p>[]</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n     {\n        \"code\": \"200\",\n\t\t\t   \"msg\": \"喜欢\",\n\t\t\t   \"data\": {\n\t\t\t\t    \"is_see\":  \"是否看过 1:是 0:否\",\n\t\t\t\t    \"is_like\": \"是否想看 1:是 0:否\",\n\t\t\t\t}\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 404": [
+          {
+            "group": "Error 404",
+            "optional": false,
+            "field": "404",
+            "description": "<p>数据错误</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 数据错误\n{\n  \"msg\": 错误信息,\n  \"code\": 错误编号\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Film.php",
+    "groupTitle": "想看/喜欢_操作"
   },
   {
     "type": "get",
@@ -314,7 +404,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./v1/controller/Area.php",
+    "filename": "./Area.php",
     "groupTitle": "设置地区"
   },
   {
@@ -397,7 +487,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./v1/controller/Cinema.php",
+    "filename": "./Cinema.php",
     "groupTitle": "设置影院"
   },
   {
@@ -494,7 +584,7 @@
       ]
     },
     "version": "0.0.0",
-    "filename": "./v1/controller/Index.php",
+    "filename": "./Index.php",
     "groupTitle": "首页"
   }
 ]

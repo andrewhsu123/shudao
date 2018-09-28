@@ -43,9 +43,50 @@ class FilmModel extends Model {
         $info['release_time'] = date('Y年m月d日',$info['release_time'])."上映";
         $info['actor']    = ActorModel::getActorList($info['actor_ids']);
         $info['still']    = db('Still')->field('img')->where('group',$info['still_group'])->select();
-        $info['is_see']   = 1;
-        $info['is_like']  = 1;
+        $info['is_see']   = self::getLike($user_id,$info['still_group'],2);
+        $info['is_like']  = self::getLike($user_id,$info['still_group'],1);
         unset($info['actor_ids'],$info['still_group']);
         return $info;
     }
+
+    /**
+     * 喜欢想看操作
+     * @param      <type>  $film_id  The film identifier
+     * @param      <type>  $type     The type
+     * @param      <type>  $user_id  The user identifier
+     * @return     <type>  ( description_of_the_return_value )
+     */
+    public static function likeFilm($film_id,$type,$user_id){
+        $film_group = db('Film')->where('id',$film_id)->value('still_group');
+        $where = array('user_id'=>$user_id,'film_group'=>$film_group,'type'=>$type);
+        $count = db('Like')->where($where)->count();
+        if($count>0){
+            db('Like')->where($where)->delete();
+        }else{
+            db('Like')->data($where)->insert();
+        }
+        if($type == 1){
+            $data['is_like']  = self::getLike($user_id,$film_group,1);
+        }else{
+            $data['is_see']   = self::getLike($user_id,$film_group,2);
+        }
+        return $data;
+    }
+
+    /**
+     * 是否喜欢
+     * @param      <type>  $user_id     用户编号
+     * @param      <type>  $film_group  电影剧照组别
+     * @param      <type>  $type        类型 1:想看 2:看过
+     */
+    public static function getLike($user_id,$film_group,$type){
+        $where = array('user_id'=>$user_id,'film_group'=>$film_group,'type'=>$type);
+        $count = db('Like')->where($where)->count();
+        if($count>0){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
 }

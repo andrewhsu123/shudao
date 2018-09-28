@@ -6,6 +6,7 @@ use think\Request;
 use think\Db;
 use think\Lang;
 
+header('Access-Control-Allow-Origin:*');
 class BaseController {
 
     //不需要TOKEN校验地址
