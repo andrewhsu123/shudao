@@ -72,8 +72,98 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./Area.php",
+    "filename": "./v1/controller/Area.php",
     "groupTitle": "地区列表"
+  },
+  {
+    "type": "get",
+    "url": "http://shudaoo.com/v1/film_time/index",
+    "title": "",
+    "name": "index",
+    "group": "场次列表",
+    "parameter": {
+      "fields": {
+        "params": [
+          {
+            "group": "params",
+            "type": "sting",
+            "optional": false,
+            "field": "token",
+            "description": "<p>用户唯一标识符[目前默认123456]</p>"
+          },
+          {
+            "group": "params",
+            "type": "int",
+            "optional": false,
+            "field": "film_id",
+            "description": "<p>电影编号</p>"
+          },
+          {
+            "group": "params",
+            "type": "int",
+            "optional": false,
+            "field": "cinema_id",
+            "description": "<p>影院编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "int",
+            "optional": false,
+            "field": "code",
+            "description": "<p>200</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "msg",
+            "description": "<p>接口访问成功</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data",
+            "description": "<p>[]</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n     {\n        \"code\": \"200\",\n\t\t   \"msg\": \"场次列表\",\n\t\t   \"data\": {\n\t\t   \n\t\t\t\t\"filmList\": [  -- 电影列表\n\t\t\t\t{\n\t\t\t\t\t\"id\": 1, 电影编号\n\t\t\t\t\t\"name\": \"电影名称\",\n\t\t\t\t\t\"introduction\": \"简介\",\n\t\t\t\t\t\"img\": \"电影主图\",\n\t\t\t\t\t\"score\": 排序,\n\t\t\t\t\t\"movie_type\": \"120分钟  剧情、悬疑\",\n\t\t\t\t\t\"actor\": \"主演\",\n\t\t\t\t\t\"video_type\": \"2D,3D,IMAX,MX4D\"\n\t\t\t\t},\n\t\t\t    \"timeList\": [  -- 场次列表\n\t\t\t      \t{\n\t\t\t\t        \"time_fmt\": \"09月30日\", -- 场次时间\n\t\t\t\t        \"time_week\": \"周日\",    -- 场次时间\n\t\t\t\t        \"lists\": [\n\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\"id\": 1,\t       \t\t\t  -- 场次编号\n\t\t\t\t\t\t\t\t\"h\": 10,           \t\t\t  -- 场次小时\n\t\t\t\t\t\t\t\t\"i\": 0,            \t\t\t  -- 场次分钟\n\t\t\t\t\t\t\t\t\"price\": \"33.00\",  \t\t\t  -- 该场次价格\n\t\t\t\t\t\t\t\t\"hall_id\": 1,      \t\t\t  -- 影厅编号\n\t\t\t\t\t\t\t\t\"type\": \"3D英语\",     \t\t  -- 电影类型\n\t\t\t\t\t\t\t\t\"hall_name\": \"1号厅\"  \t\t  -- 影厅名称\n\t\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t    \t],\n\t\t    \t\"address\": {\n\t\t\t\t\t\"id\": 1,   -- 地址编号\n\t\t\t\t\t\"name\": \"影院名称\",\n\t\t\t\t\t\"address\": \"影院地址\",\n\t\t\t\t\t\"area_id\": 所属地区编号,\n\t\t\t\t\t\"phone\": \"17759462410\",\n\t\t\t\t\t\"sort\": 0\n\t\t\t\t}\n\t\t  \t}\n     }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 404": [
+          {
+            "group": "Error 404",
+            "optional": false,
+            "field": "404",
+            "description": "<p>数据错误</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 数据错误\n{\n  \"msg\": 错误信息,\n  \"code\": 错误编号\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./v1/controller/FilmTime.php",
+    "groupTitle": "场次列表"
   },
   {
     "type": "get",
@@ -155,7 +245,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./Film.php",
+    "filename": "./v1/controller/Film.php",
     "groupTitle": "影片详情"
   },
   {
@@ -238,7 +328,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./Cinema.php",
+    "filename": "./v1/controller/Cinema.php",
     "groupTitle": "影院列表"
   },
   {
@@ -328,7 +418,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./Film.php",
+    "filename": "./v1/controller/Film.php",
     "groupTitle": "想看/喜欢_操作"
   },
   {
@@ -404,7 +494,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./Area.php",
+    "filename": "./v1/controller/Area.php",
     "groupTitle": "设置地区"
   },
   {
@@ -487,7 +577,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./Cinema.php",
+    "filename": "./v1/controller/Cinema.php",
     "groupTitle": "设置影院"
   },
   {
@@ -584,7 +674,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "./Index.php",
+    "filename": "./v1/controller/Index.php",
     "groupTitle": "首页"
   }
 ] });

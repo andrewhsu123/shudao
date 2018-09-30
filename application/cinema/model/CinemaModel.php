@@ -27,4 +27,11 @@ class CinemaModel extends Model {
         $result  = array('code'=>"200", 'msg'=>"设置影院成功");
         return $result;
     }
+
+
+    // 设置获取影院信息
+    public static function getCinema($cinema_id){
+        $result    = db('Cinema')->where('id',$cinema_id)->find();
+        return $result;
+    }
 }

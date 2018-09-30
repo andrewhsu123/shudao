@@ -37,7 +37,7 @@ class FilmModel extends Model {
      * 获取影片详情
      * @param      <type>  $id     影片编号
      */
-    public static function getFilm($id,$user_id){
+    public static function getFilm($id,$user_id=0){
         $field = "id,name,img,still_group,actor_ids,release_time,video_type,movie_type,detail,score";
         $info  = db('Film')->field($field)->where('id',$id)->find();
         $info['release_time'] = date('Y年m月d日',$info['release_time'])."上映";
