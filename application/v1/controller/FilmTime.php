@@ -30,7 +30,7 @@ class FilmTime extends BaseController {
 	 *					"introduction": "简介",
 	 *					"img": "电影主图",
 	 *					"score": 排序,
-	 *					"movie_type": "120分钟  剧情、悬疑",
+	 *					"movie_type": "120分钟  剧情、悬疑" ,
 	 *					"actor": "主演",
 	 *					"video_type": "2D,3D,IMAX,MX4D"
 	 *				},
