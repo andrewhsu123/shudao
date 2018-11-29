@@ -7,7 +7,7 @@ use app\common;
 class AdminModel extends Model {
 
     /**
-     * 获取管理员信息
+     * 获取管理员登陆信息
      *
      * @param [String] $account   账户
      * @param [String] $password  密码

@@ -18,27 +18,27 @@ class Index extends BaseController {
 	 * @apiSuccess {String} msg  接口访问成功
 	 * @apiSuccess {Array} data []
 	 * @apiSuccessExample Success-Response:
-	 *    HTTP/1.1 200 OK
-	 *      {
-	 *        "banner": "---轮播图---",
-	 *        "name": "图片名称",
-	 *        "url": "跳转链接",
-	 *        "name": "图片地址",
-	 *        "hotFilm": "---正在热播---",
-	 *        "id": "影片编号",
-	 *        "name": "影片名称",
-	 *        "introduction": "影片一句话简介",
-	 *        "img": "影片图片",
-	 *        "score": "影片评分",
-	 *        "showFilm": "---即将上映---",
-	 *        "id": "影片编号",
-	 *        "name": "影片名称",
-	 *        "see_num": "想看人数",
-	 *        "filmList": "---全部影片---",
-	 *        "movie_type": "120分钟  犯罪、剧情、冒险",
-	 *        "actor": "主演",
-	 *        "video_type": "2D,3D,IMAX,MX4D,中国巨幕",
-	 *       }
+	 * HTTP/1.1 200 OK
+	 *  {
+	 *    "banner": "---轮播图---",
+	 *    "name": "图片名称",
+	 *    "url": "跳转链接",
+	 *    "name": "图片地址",
+	 *    "hotFilm": "---正在热播---",
+	 *    "id": "影片编号",
+	 *    "name": "影片名称",
+	 *    "introduction": "影片一句话简介",
+	 *    "img": "影片图片",
+	 *    "score": "影片评分",
+	 *    "showFilm": "---即将上映---",
+	 *    "id": "影片编号",
+	 *    "name": "影片名称",
+	 *    "see_num": "想看人数",
+	 *    "filmList": "---全部影片---",
+	 *    "movie_type": "120分钟  犯罪、剧情、冒险",
+	 *    "actor": "主演",
+	 *    "video_type": "2D,3D,IMAX,MX4D,中国巨幕",
+	 *   }
 	 * @apiError (Error 404) 404 数据错误
 	 *
 	 * @apiErrorExample Error-Response:

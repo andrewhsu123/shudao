@@ -17,19 +17,19 @@ class Area extends BaseController {
 	 * 
 	 *
 	 * @apiSuccessExample Success-Response:
-	 *    HTTP/1.1 200 OK
-	 *      {
-	 *        "id": "地区编号",
-	 *        "name": "地区名称",
-	 *        "pcity": "下级地区",
-	 *       }
+	 * HTTP/1.1 200 OK
+	 * {
+	 *  "id": "地区编号",
+	 *  "name": "地区名称",
+	 *  "pcity": "下级地区",
+	 * }
 	 * @apiError (Error 404) 404 数据错误
 	 *
 	 * @apiErrorExample Error-Response:
-	 *     HTTP/1.1 404 数据错误
-	 *     {
-	 *       "error": err
-	 *     }
+	 * HTTP/1.1 404 数据错误
+	 * {
+	 *   "error": err
+	 * }
 	 */
 	public function index(){
 		$areaInfo 	= AreaModel::getArea();
@@ -50,18 +50,18 @@ class Area extends BaseController {
 	 * @apiSuccess {Array} data []
 	 *
 	 * @apiSuccessExample Success-Response:
-	 *    HTTP/1.1 200 OK
-	 *      {
-	 *        "msg": "返回消息",
-	 *        "code": "错误编码",
-	 *       }
+	 * HTTP/1.1 200 OK
+	 * {
+	 *  "msg": "返回消息",
+	 *  "code": "错误编码",
+	 * }
 	 * @apiError (Error 404) 404 数据错误
 	 *
 	 * @apiErrorExample Error-Response:
-	 *     HTTP/1.1 404 数据错误
-	 *     {
-	 *       "error": err
-	 *     }
+	 * HTTP/1.1 404 数据错误
+	 * {
+	 *  "error": err
+	 * }
 	 */
 	public function setArea(){
 		$user_id = UID;

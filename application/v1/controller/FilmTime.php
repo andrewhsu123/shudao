@@ -17,49 +17,46 @@ class FilmTime extends BaseController {
 	 * @apiSuccess {String} msg  接口访问成功
 	 * @apiSuccess {Array} data []
 	 * @apiSuccessExample Success-Response:
-	 *    HTTP/1.1 200 OK
-	 *      {
-	 *         "code": "200",
-	 *		   "msg": "场次列表",
-	 *		   "data": {
-	 *		   
-	 *				"filmList": [  -- 电影列表
-	 *				{
-	 *					"id": 1, 电影编号
-	 *					"name": "电影名称",
-	 *					"introduction": "简介",
-	 *					"img": "电影主图",
-	 *					"score": 排序,
-	 *					"movie_type": "120分钟  剧情、悬疑" ,
-	 *					"actor": "主演",
-	 *					"video_type": "2D,3D,IMAX,MX4D"
-	 *				},
-	 *			    "timeList": [  -- 场次列表
-	 *			      	{
-	 *				        "time_fmt": "09月30日", -- 场次时间
-	 *				        "time_week": "周日",    -- 场次时间
-	 *				        "lists": [
-	 *							{
-	 *								"id": 1,	       			  -- 场次编号
-	 *								"h": 10,           			  -- 场次小时
-	 *								"i": 0,            			  -- 场次分钟
-	 *								"price": "33.00",  			  -- 该场次价格
-	 *								"hall_id": 1,      			  -- 影厅编号
-	 *								"type": "3D英语",     		  -- 电影类型
-	 *								"hall_name": "1号厅"  		  -- 影厅名称
-	 *							}
-	 *					}
-	 *		    	],
-	 *		    	"address": {
-	 *					"id": 1,   -- 地址编号
-	 *					"name": "影院名称",
-	 *					"address": "影院地址",
-	 *					"area_id": 所属地区编号,
-	 *					"phone": "17759462410",
-	 *					"sort": 0
-	 *				}
-	 *		  	}
-	 *      }
+	 * HTTP/1.1 200 OK
+	 * {
+	 *  "code": "200",
+	 *  "msg": "场次列表",
+	 *  "data": {
+	 *	"filmList": [  -- 电影列表
+	 *	{
+	 *    "id": 1, 电影编号
+	 *    "name": "电影名称",
+	 *    "introduction": "简介",
+	 *    "img": "电影主图",
+	 *    "score": 排序,
+	 *    "movie_type": "120分钟  剧情、悬疑" ,
+	 *    "actor": "主演",
+	 *    "video_type": "2D,3D,IMAX,MX4D"
+	 *	}],  
+	 *	"timeList": [   -- 场次列表
+	 *	{
+	 *	  "time_fmt": "09月30日", -- 场次时间
+	 *	  "time_week": "周日",    -- 场次时间
+	 *	  "lists": [{
+	 *	  	"id": 1,	       	  -- 场次编号
+	 *	  	"h": 10,           	  -- 场次小时
+	 *	  	"i": 0,            	  -- 场次分钟
+	 *	  	"price": "33.00",  	  -- 该场次价格
+	 *	  	"hall_id": 1,      	  -- 影厅编号
+	 *	  	"type": "3D英语",      -- 电影类型
+	 *	  	"hall_name": "1号厅"   -- 影厅名称
+	 *	  }
+	 *	}],
+	 *    "address": {
+	 *		"id": 1,   -- 地址编号
+	 *		"name": "影院名称",
+	 *		"address": "影院地址",
+	 *		"area_id": 所属地区编号,
+	 *		"phone": "17759462410",
+	 *		"sort": 0
+	 *	}
+	 *  }
+	 *   }
 	 * @apiError (Error 404) 404 数据错误
 	 *
 	 * @apiErrorExample Error-Response:

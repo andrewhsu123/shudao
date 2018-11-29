@@ -78,23 +78,23 @@ class Film extends BaseController {
 	 * @apiSuccess {String} msg  接口访问成功
 	 * @apiSuccess {Array} data []
 	 * @apiSuccessExample Success-Response:
-	 *    HTTP/1.1 200 OK
-	 *      {
-	 *         "code": "200",
-	 *		   "msg": "喜欢",
-	 *		   "data": {
-	 *			    "is_see":  "是否看过 1:是 0:否",
-	 *			    "is_like": "是否想看 1:是 0:否",
-	 *			}
-	 *       }
+	 * HTTP/1.1 200 OK
+	 * {
+	 *  "code": "200",
+	 *  "msg": "喜欢",
+	 *  "data": {
+	 *    "is_see":  "是否看过 1:是 0:否",
+	 *    "is_like": "是否想看 1:是 0:否",
+	 *  }
+	 * }
 	 * @apiError (Error 404) 404 数据错误
 	 *
 	 * @apiErrorExample Error-Response:
-	 *     HTTP/1.1 404 数据错误
-	 *     {
-	 *       "msg": 错误信息,
-	 *       "code": 错误编号
-	 *     }
+	 * HTTP/1.1 404 数据错误
+	 * {
+	 *   "msg": 错误信息,
+	 *   "code": 错误编号
+	 * }
 	 */
 	public function like(){
 		$film_id = input('id');
