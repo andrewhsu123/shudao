@@ -7,7 +7,7 @@ use app\cinema\model\CinemaModel;
 
 class FilmTime extends BaseController {
 	/**
-	 * @api {get} http://shudaoo.com/v1/film_time/index
+	 * @api {get} /v1/film_time/index
 	 * @apiName  index
 	 * @apiGroup 场次列表
 	 * @apiParam (params) {sting} token 用户唯一标识符[目前默认123456]

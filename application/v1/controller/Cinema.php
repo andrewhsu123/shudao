@@ -6,7 +6,7 @@ use app\cinema\model\CinemaModel;
 class Cinema extends BaseController {
 
 	/**
-	 * @api {get} http://shudaoo.com/v1/cinema/index
+	 * @api {get} /v1/cinema/index
 	 * @apiName  index
 	 * @apiGroup 影院列表
 	 * @apiParam (params) {sting} token 用户唯一标识符[目前默认123456]
@@ -44,7 +44,7 @@ class Cinema extends BaseController {
 	}
 
 	/**
-	 * @api {get} http://shudaoo.com/v1/cinema/setCinema
+	 * @api {get} /v1/cinema/setCinema
 	 * @apiName  setCinema
 	 * @apiGroup 设置影院
 	 * @apiParam (params) {sting} token 用户唯一标识符 

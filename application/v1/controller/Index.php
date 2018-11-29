@@ -7,7 +7,7 @@ use app\film\model\FilmModel;
 class Index extends BaseController {
 	
 	/**
-	 * @api {get} http://shudaoo.com/v1/index/index
+	 * @api {get} /v1/index/index
 	 * @apiName  index
 	 * @apiGroup 首页
 	 * @apiParam (params) {sting} token 用户唯一标识符[目前默认123456]

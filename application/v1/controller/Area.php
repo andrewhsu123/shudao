@@ -6,7 +6,7 @@ use app\area\model\AreaModel;
 class Area extends BaseController {
 
 	/**
-	 * @api {get} http://shudaoo.com/v1/area/index
+	 * @api {get} /v1/area/index
 	 * @apiName  index
 	 * @apiGroup 地区列表
 	 * @apiParam (params) {sting} token 用户唯一标识符
@@ -40,7 +40,7 @@ class Area extends BaseController {
 
 
 	/**
-	 * @api {get} http://shudaoo.com/v1/area/setArea
+	 * @api {get} /v1/area/setArea
 	 * @apiName  setArea
 	 * @apiGroup 设置地区
 	 * @apiParam (params) {sting} token 用户唯一标识符 
