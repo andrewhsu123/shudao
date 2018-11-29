@@ -1,8 +1,8 @@
 {
   "name": "shudaoo", 
-  "version": "0.1.0"
+  "version": "1.0.0",
   "description": "shudao api", 
   "title": "蜀道API",
   "url": "http://api.shudaoo.com/", 
-  "sampleUrl": "api.shudaoo.com"
+  "sampleUrl": "./public/index.php"
 }
