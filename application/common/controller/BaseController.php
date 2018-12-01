@@ -71,42 +71,7 @@ class BaseController {
             Lang::load(APP_PATH . 'lang/' . $langArr[$lang] . '.php');
         }
     }
-
-    /**
-     * 错误
-     * @param $msg
-     * @param int $code
-     * @param array $option
-     * @return \think\response\Json
-     */
-    protected function error($msg, $code = 99999, $option = []) {
-        $result = [
-            'code' => $code,
-            'msg' => $msg
-        ];
-        if($option) {
-            $result += $option;
-        }
-
-        return json($result);
-    }
-
-    /**
-     * 成功
-     * @param string $msg
-     * @param array $data
-     * @return \think\response\Json
-     */
-    protected function success($msg = '', $data = []) {
-        $result = [
-            'code' => 200,
-            'msg' => $msg,
-            'data' => $data
-        ];
-
-        return json($result);
-    }
-
+    
     /**
      * Ajax方式返回数据到客户端
      * @access protected
