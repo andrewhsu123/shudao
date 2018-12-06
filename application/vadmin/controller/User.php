@@ -20,6 +20,16 @@ class User extends BaseController {
 
     public function getUserList()
     {
-
+        $page 	  = input('page','1');
+        $size     = input('size','10');
+        $where    = [];
+        try {
+            $data   = UserAction::getUserList($page, $size, $where);
+            $return = array('code'=>'0', 'msg'=>'用户列表', 'data'=>$data);
+            $this->ajaxReturn($return);
+        } catch (\Throwable $e) {
+            $return   = array('code'=>'200', 'msg'=>$e->getMessage());
+            $this->ajaxReturn($return);
+        }
     }
 }

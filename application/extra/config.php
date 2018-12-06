@@ -14,7 +14,7 @@ $arr = [
         'zh' => 'zh-cn',
         'en' => 'en-us'
     ],
-
+    'page_num' => 10
 ];
 
 return array_merge($arr, $envArr);
