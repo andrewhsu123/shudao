@@ -40,12 +40,13 @@ class BaseController {
                 exit($this->error(lang('invalid_token'), 401)->send());
             }
             // 没有找到用户
-            $user_id = db('UserToken')->where('token', $token)->value('user_id');
+            $user_id = db('TokenUser')->where('token', $token)->value('user_id');
             if(empty($user_id)) {
                 exit($this->error(lang('invalid_token'), 402)->send());
             }
 
             $user = db('user')->field('status,nickname')->where('id', $user_id)->find();
+
             if(empty($user)) {
                 exit($this->error(lang('invalid_token'), 403)->send());
             }
