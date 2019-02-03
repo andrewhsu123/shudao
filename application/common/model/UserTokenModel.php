@@ -13,7 +13,7 @@ use think\Model;
 class UserTokenModel extends Model {
 
 	public static function api_find($user_id, $type = '1') {
-		$database = db('user_token');
+		$database = db('tokenUser');
 		$where = [
 			'user_id' => $user_id,
 			'type' => $type,
@@ -24,7 +24,7 @@ class UserTokenModel extends Model {
 	}
 
 	public static function __check_exists($user_id, $type = '1') {
-		$database = db('user_token');
+		$database = db('tokenUser');
 		$where = [
 			'user_id' => $user_id,
 			'type' => $type,
@@ -36,7 +36,7 @@ class UserTokenModel extends Model {
 	}
 
 	public static function api_verify_token($user_id, $token) {
-		$database = db('user_token');
+		$database = db('tokenUser');
 		$where = [
 			'user_id' => $user_id,
 			'token' => $token,
@@ -50,7 +50,7 @@ class UserTokenModel extends Model {
 	}
 
 	public static function api_insert($user_id, $token, $type = '1', $dt = null) {
-		$database = db('user_token');
+		$database = db('tokenUser');
 		$data = [
 			'user_id' => $user_id,
 			'token' => $token,
@@ -63,7 +63,7 @@ class UserTokenModel extends Model {
 	}
 
 	public static function api_delete($user_id, $type = null) {
-		$database = db('user_token');
+		$database = db('tokenUser');
 		$data['user_id'] = $user_id;
 		if ($type) {
 			$data['type'] = $type;
