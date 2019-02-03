@@ -9,10 +9,6 @@ class WeiXin extends BaseController {
     private $appsecert = "561075bb55c94aa171b2c7001d4b735f";
     private $redirect_uri = "http://192.168.0.122/";
 
-    // private $appid = "wx041114c91cc5ec23";
-    // private $appsecert = "0bff6c0b7e318100b7dcb474c6fa28a2";
-    // private $redirect_uri = "http://192.168.0.122/";
-
     public function index() {
         
     }
