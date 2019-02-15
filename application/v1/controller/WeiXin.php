@@ -5,21 +5,63 @@ use app\common\controller\BaseController;
 
 class WeiXin extends BaseController {
 
-    private $appid = "wx677de14743811b48";
-    private $appsecert = "561075bb55c94aa171b2c7001d4b735f";
-    private $redirect_uri = "http://192.168.0.122/";
-
-    public function index() {
-        
-    }
+    private $appid = "wx5599fb739f660ecd";
+    private $appsecert = "3ff5099d2c1bd9fea946547b7fd5318a";
+    private $redirect_uri = "http://shudaoo.com";
 
     public function wxLogin(){
         $appid = $this->appid;
         $redirect_uri = urlencode($this->redirect_uri);
-        $scope = "snsapi_login";
+        $scope = "snsapi_userinfo";
         $state = "wxLogin";
-        $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$appid."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state."#wechat_redirect";
+        $url   = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appid."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state."#wechat_redirect";
         return redirect($url);
+    }
+    
+    public function createMenu(){
+        $ACCESS_TOKEN = input('access_token');
+        $data = '{
+            "button":[
+                {
+                    "name":"示例程序",
+                    "sub_button":[
+                        {    
+                            "type":"view",
+                            "name":"蜀道电影",
+                            "url":"http://shudaoo.com/"
+                        },
+                        {
+                            "type":"click",
+                            "name":"赞一下我们",
+                            "key":"1"
+                        }
+                    ]
+                },
+                {    
+                    "type":"view",
+                    "name":"关于我们",
+                    "url":"http://www.shudaoo.com/"
+                }
+            ]
+        }';
+        $ch = curl_init();
+ 
+        curl_setopt($ch, CURLOPT_URL, "https://api.weixin.qq.com/cgi-bin/menu/create?access_token={$ACCESS_TOKEN}");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $tmpInfo = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Errno'.curl_error($ch);
+        }
+        curl_close($ch);
+        var_dump($tmpInfo);
+ 
     }
 
     // public function weixin(Request $req){

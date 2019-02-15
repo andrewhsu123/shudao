@@ -12,7 +12,7 @@ class BaseController {
     //不需要TOKEN校验地址
     private static $allowUrl = [
         '',
-        // 'v1/index/indexf',
+        // 'v1/login/login',
         // 'v1/account/changePwd',
         // 'v1/account/reg',
         // 'v1/sms/send',
