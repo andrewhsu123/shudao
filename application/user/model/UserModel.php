@@ -28,9 +28,42 @@ class UserModel extends Model {
         return $userId;
     }
     
-    public static function getUserToken()
+    /**
+     * 更新并获取token
+     *
+     * @param [int] $userId 用户编号
+     * @return void
+     */
+    public static function getUserToken($userId)
     {
+        $token = createToken();
+        $data  = [
+            'token' => $token,
+            'expire_time' => time() + 86400,
+            'login_time'  => time()
+        ];
+        $flag  = db('TokenUser')->where('id', $userId)->save($data);
+        return $token;
+    }
 
+    /**
+     * 新建用户创建token
+     *
+     * @return void
+     */
+    public static function createUserToken($userInfo)
+    {
+        $token = createToken();
+        $data  = [
+            'open_id'  => $userInfo['openid'],
+            'nickname' => $userInfo['nickname'],
+            'sex'      => $userInfo['sex'],
+            'status'   => 1,
+        ];
+        db('TokenUser')->insert($data);
+        $userId = db('TokenUser')->getLastInsID();
+        $result = ['userId'=>$userId, 'token'=>$token];
+        return $result;
     }
 
 }

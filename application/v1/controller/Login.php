@@ -39,18 +39,20 @@ class Login extends BaseController
             echo "参数错误，请发消息给公众号，留言";
             exit;
         }
-
         try {
-            // 是否存在用户
+            Db::startTrans();
             $userId   = UserModel::checkRegist($userinfo['openid']);
             if ($userId) {
                 $token = UserModel::getUserToken($userId);
+                $data  = ['userId'=>$userId, 'token'=>$token];
             } else {
-                $token = UserModel::getUserToken();
+                $data  = UserModel::createUserToken($userinfo);
             }
-            $return = ['code' => '0', 'msg' => "登陆成功", 'data' => ['token' => $token]];
+            Db::commit();
+            $return = ['code' => '0', 'msg' => "登陆成功", 'data' => $data];
             $this->ajaxReturn($return);
         } catch (\Exception $e) {
+            Db::rollback();
             $this->ajaxReturn(['code'=>$e->getCode(), 'msg' => $e->getMessage()]);
         }
     }
