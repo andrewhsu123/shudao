@@ -1,5 +1,6 @@
 <?php
 namespace app\v1\controller;
+use think\Db;
 use app\common\controller\BaseController;
 use app\user\model\UserModel;
 
@@ -7,7 +8,7 @@ class Login extends BaseController
 {
     private $appid = "wx5599fb739f660ecd";
     private $appsecret = "3ff5099d2c1bd9fea946547b7fd5318a";
-    private $redirect_uri = "http://shudaoo.com/v1/Login/login";
+    private $redirect_uri = "http://shudaoo.com/v1/login/login";
 
     public function index()
     {
@@ -19,17 +20,6 @@ class Login extends BaseController
         return redirect($url);
     }
 
-    /*
-    Array ( 
-        [openid] => oa0bZ1Zoxr8yn8T5htn9_qDXp-hY 
-        [nickname] => 許先生想養一只哈士奇 
-        [sex] => 1 [language] => zh_CN 
-        [city] => 福州 
-        [province] => 福建 
-        [country] => 中国 
-        [headimgurl] => http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83epwq40t4S0PZGDEOicgeW1g21ODnCQv4haXObibrmZicJB8zxibkXe4yjVlTicx0nElMtLTVgdVDqRwk8w/132 
-        [privilege] => Array ( ) )
-    */
     public function login()
     {
         $oauth2_info = $this->oauth2_access_token($_GET["code"]);
@@ -89,12 +79,5 @@ class Login extends BaseController
         curl_close($curl);
         return $output;
     }
-
-    //生成扫码登录的URL
-    // public function qrconnect($redirect_url, $scope, $state = NULL)
-    // {
-    //     $url = "https://open.weixin.qq.com/connect/qrconnect?appid=".$this->appid."&redirect_uri=".urlencode($redirect_url)."&response_type=code&scope=".$scope."&state=".$state."#wechat_redirect";
-    //     return $url;
-    // }
 
 }

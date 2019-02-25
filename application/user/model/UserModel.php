@@ -42,7 +42,7 @@ class UserModel extends Model {
             'expire_time' => time() + 86400,
             'login_time'  => time()
         ];
-        $flag  = db('TokenUser')->where('id', $userId)->save($data);
+        $flag  = db('TokenUser')->where('id', $userId)->update($data);
         return $token;
     }
 
@@ -60,8 +60,17 @@ class UserModel extends Model {
             'sex'      => $userInfo['sex'],
             'status'   => 1,
         ];
+        db('User')->insert($data);
+        $userId = db('User')->getLastInsID();
+        
+        $data = [
+            'user_id' => $userId,
+            'token' => $token,
+            'expire_time' => time() + 86400,
+            'login_time' => time(),
+        ];
         db('TokenUser')->insert($data);
-        $userId = db('TokenUser')->getLastInsID();
+
         $result = ['userId'=>$userId, 'token'=>$token];
         return $result;
     }

@@ -12,51 +12,19 @@ class BaseController {
     //不需要TOKEN校验地址
     private static $allowUrl = [
         '',
-        // 'v1/login/login',
-        // 'v1/account/changePwd',
-        // 'v1/account/reg',
-        // 'v1/sms/send',
-        // 'v1/charge/addressImg',
-        // 'v1/charge/notify',
-        // 'v1/charge/takeMsgNofify',
-        // 'v1/charge/balanceChange',
-        // 'v1/hatch/distribution',
-        // 'v1/config',
-        // 'v1/transfer/notify',
+        'v1/login/index',
+        'v1/login/login',
     ];
 
     public function __construct(Request $request) {
-        // 
         $this->detectLang();
         // 获取当前访问的路径   ltrim => 移除左侧空白
         $baseUrl = ltrim($request->baseUrl(), '/');
         // 如果访问路径不在数组里则验证 token
-        // if(!in_array($baseUrl, self::$allowUrl)) {
-        if(1) {
-            // 获取登录 token
-            $token = input('token',123456);
-            // 没有提交token
-            if(empty($token)) {
-                exit($this->error(lang('invalid_token'), 401)->send());
-            }
-            // 没有找到用户
-            $user_id = db('tokenUser')->where('token', $token)->value('user_id');
-            if(empty($user_id)) {
-                exit($this->error(lang('invalid_token'), 402)->send());
-            }
-
-            $user = db('user')->field('status,nickname')->where('id', $user_id)->find();
-
-            if(empty($user)) {
-                exit($this->error(lang('invalid_token'), 403)->send());
-            }
-            //判断封号
-            if($user['status'] == 0) {
-                exit($this->error(lang('account_disabled'), 404)->send());
-            }
-            define('UID', $user_id);
+        if(!in_array($baseUrl, self::$allowUrl)) {
+            $token = request()->header('token');
+            $this->_validate($token);
         }
-
     }
 
     /**
@@ -96,6 +64,29 @@ class BaseController {
                 header('Content-Type:application/json; charset=utf-8');
                 exit(json_encode($data,$json_option));
         }
+    }
+
+    private function _validate($token){
+        
+        if (empty($token)) {
+        	$return = array('code'=>10001, 'msg'=>"请先登录账号");
+        	$this->ajaxReturn($return);
+        }
+        $user_id = db('tokenUser')->where('token', $token)->value('user_id');
+        if (empty($user_id)) {
+        	$return = array('code'=>10002, 'msg'=>"登陆过期请重新登陆");
+        	$this->ajaxReturn($return);
+        }
+        $user = db('user')
+            ->where('status', 1)
+            ->where('id', $user_id)
+            ->find();
+        session('userInfo',$user);
+        if (empty($user)) {
+        	$return = array('code'=>10003, 'msg'=>"用户已被禁用，请联系管理员");
+        	$this->ajaxReturn($return);
+        }
+        define('UID', $user_id, false);
     }
 
 }

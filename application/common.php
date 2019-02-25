@@ -182,28 +182,6 @@ function tableLang($name, $id, $vars = [], $lang = '') {
 }
 
 /**
- * 异常处理
- *
- * @param [type] $namespace
- * @param [type] $exceptionClassName
- * @param string $message
- * @param [type] $debugMessage
- * @return void
- */
-function throw_exception($namespace, $exceptionClassName, $message = '', $debugMessage = null)
-{
-    $namespace = $namespace . '\\Exceptions';
-    if (!class_exists('\\' . $namespace . '\Exception')) {
-        eval('namespace ' . $namespace . ' { class Exception extends \Api\ExtException {} }');
-    }
-    if (!class_exists('\\' . $namespace . '\\' . $exceptionClassName)) {
-        eval('namespace ' . $namespace . ' { class ' . $exceptionClassName . ' extends Exception {} }');
-    }
-    eval('namespace ' . $namespace . ' { throw new ' . $exceptionClassName . '("' . $message . '", "' . $debugMessage . '"); }');
-}
-
-
-/**
  * CURL请求
  * @param $url string 请求地址
  * @param string $method 请求方式GET、POST
