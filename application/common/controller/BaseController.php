@@ -9,6 +9,9 @@ use think\Lang;
 header('Access-Control-Allow-Origin:*');
 class BaseController {
 
+    public $uid;
+    public $userInfo;
+
     //不需要TOKEN校验地址
     private static $allowUrl = [
         '',
@@ -81,12 +84,12 @@ class BaseController {
             ->where('status', 1)
             ->where('id', $user_id)
             ->find();
-        session('userInfo',$user);
         if (empty($user)) {
         	$return = array('code'=>10003, 'msg'=>"用户已被禁用，请联系管理员");
         	$this->ajaxReturn($return);
         }
-        define('UID', $user_id, false);
+        $this->uid = $user_id;
+        $this->userInfo = $user;
     }
 
 }
