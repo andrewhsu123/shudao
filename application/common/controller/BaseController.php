@@ -15,9 +15,7 @@ class BaseController {
     //不需要TOKEN校验地址
     private static $allowUrl = [
         '',
-        'v1/login/index',
         'v1/login/login',
-        'v1/wei_xin/sendWxLoginInfo',
     ];
 
     public function __construct(Request $request) {
