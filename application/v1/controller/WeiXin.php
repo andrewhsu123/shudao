@@ -1,23 +1,79 @@
 <?php
 namespace app\v1\controller;
 
-use app\common\controller\BaseController;
-
-class WeiXin extends BaseController {
+class WeiXin{
 
     private $appid = "wx5599fb739f660ecd";
-    private $appsecert = "3ff5099d2c1bd9fea946547b7fd5318a";
-    private $redirect_uri = "http://shudaoo.com";
-
-    public function wxLogin(){
+    private $appsecret = "3ff5099d2c1bd9fea946547b7fd5318a";
+    private $redirect_uri = "http://shudaoo.com/v1/login/login";
+    
+    /**
+     * 登陆入口 
+     * @return code 登陆需要的参数 code
+     * @return url 自动跳转到登陆获取信息接口
+     */
+    public function sendWxLoginInfo()
+    {
         $appid = $this->appid;
         $redirect_uri = urlencode($this->redirect_uri);
         $scope = "snsapi_userinfo";
         $state = "wxLogin";
-        $url   = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=".$appid."&redirect_uri=".$redirect_uri."&response_type=code&scope=".$scope."&state=".$state."#wechat_redirect";
+        $url   = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $appid . "&redirect_uri=" . $redirect_uri . "&response_type=code&scope=" . $scope . "&state=" . $state . "#wechat_redirect";
         return redirect($url);
     }
+
+    /**
+     * 登陆获取用户信息接口
+     * @return array $userInfo 用户信息
+     */
+    public function getWxLoginInfo()
+    {
+        $oauth2_info = $this->oauth2_access_token($_GET["code"]);
+        if (!empty($oauth2_info)) {
+            $userInfo = $this->oauth2_get_user_info($oauth2_info['access_token'], $oauth2_info['openid']);
+        } else {
+            return [];
+        }
+        return $userInfo;
+    }
     
+    //生成OAuth2的Access Token
+    public function oauth2_access_token($code)
+    {
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=".$this->appid."&secret=".$this->appsecret."&code=".$code."&grant_type=authorization_code";
+        $res = $this->http_request($url);
+        return json_decode($res, true);
+    }
+
+    //获取用户基本信息（OAuth2 授权的 Access Token 获取 未关注用户，Access Token为临时获取）
+    public function oauth2_get_user_info($access_token, $openid)
+    {
+        $url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token."&openid=".$openid."&lang=zh_CN";
+        $res = $this->http_request($url);
+        return json_decode($res, true);
+    }
+
+    //HTTP请求（支持HTTP/HTTPS，支持GET/POST）
+    protected function http_request($url, $data = null)
+    {
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+        if (!empty($data)){
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        }
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        $output = curl_exec($curl);
+        curl_close($curl);
+        return $output;
+    }
+
+    /**
+     * 生成微信菜单页面
+     * @return void
+     */
     public function createMenu(){
         $ACCESS_TOKEN = input('access_token');
         $data = '{
@@ -61,47 +117,5 @@ class WeiXin extends BaseController {
         }
         curl_close($ch);
         var_dump($tmpInfo);
- 
     }
-
-    // public function weixin(Request $req){
-    //     $appid="";     //在开放平台创建应用后获取的
-    //     $appkey="";  //应用签名
-    //     $code=$req->code;//触发微信登录请求接口后返回的code参数
-    //     $url='https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appkey.'&code='.$code.'&grant_type=authorization_code';
-
-    //     $data=file_get_contents($url);
-    //     $data=json_decode($data);
-
-    //     $access_token=$data->access_token;
-    //     $openid=$data->openid;
-
-
-    //     $url1='https://api.weixin.qq.com/sns/userinfo?access_token='.$access_token.'&openid='.$openid;
-    //     $call=file_get_contents($url1);
-    //     $call=json_decode($call);
-    //     //openid存在，直接登录，openid不存在，先注册再登录
-    //     $user=User::where(['type'=>User::USER_TYPE_WEIXIN, 'openid'=>$call->unionid])->first();
-
-    //     if ($user) {//当用户存在时直接登录
-    //         self::homeLogin($user->id,$user->name);return redirect('/user/index');
-    //     }
-    //     //获取从微信获取的用户信息
-    //     $name=$call->nickname;
-    //     $img=$call->headimgurl;
-    //     $sex=$call->sex;
-    //     $openid=$call->openid;
-    //     $unionid = $call->unionid;
-    //     $id=User::insertGetId(array(
-    //         'name'=>$name,
-    //         'nickname'=>$name,
-    //         'type'=>User::USER_TYPE_WEIXIN,
-    //         'openid'=>$unionid,
-    //         'img'=>$img,
-    //     ));
-
-    //     self::homeLogin($id,$name);
-    //     return redirect('/user/index');
-    // }
-
 }

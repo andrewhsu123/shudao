@@ -17,6 +17,7 @@ class BaseController {
         '',
         'v1/login/index',
         'v1/login/login',
+        'v1/wei_xin/sendWxLoginInfo',
     ];
 
     public function __construct(Request $request) {

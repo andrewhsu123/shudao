@@ -6,8 +6,7 @@ class Index extends BaseController {
 
     public function index()
     {
-        // print_r("QQ:382272420");
-        header("location:http://shudaoo.com/v1/login/index");
+        header("location:http://shudaoo.com/v1/wei_xin/sendWxLoginInfo");
     }
 
     public function test()
